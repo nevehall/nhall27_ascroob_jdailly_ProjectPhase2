@@ -8,7 +8,7 @@ public class Enemies : MonoBehaviour {
     public float speed; //  speed in m/s
 	public float fireRate = 0.3f; //seconds/shot
 	public float health = 10; 
-	public int score = 100; //points earned for destroying this
+	public int score; //points earned for destroying this
 	public float showDamageDuration = 0.1f; //# seconds to show damage
 
 	[Header("Set Dynamically: Enemy")]
@@ -19,6 +19,22 @@ public class Enemies : MonoBehaviour {
 	public bool notifiedOfDestruction = false; //will be used later
 
     private BoundsCheck _bndCheck;
+
+	private Hero hero;
+	static public Scores s;
+
+
+	void Start()
+	{
+		GameObject heroObject = GameObject.FindWithTag ("Hero");
+		if (heroObject != null) {
+			hero = heroObject.GetComponent<Hero> ();
+		}
+		if (hero == null) {
+			Debug.Log ("Cannot find 'Hero' script");
+		}
+	}
+		
 
     void Awake()
     {
@@ -75,7 +91,11 @@ public class Enemies : MonoBehaviour {
 			health -= Main.GetWeaponDefinition(p.type).damageOnHit;
 			if(health<= 0){
 				//destroy this enemy
+
+        		Scores.AddPoints(score);
 				Destroy(this.gameObject);
+				Destroy(otherGO);
+				break;
 			}
 			Destroy(otherGO);
 			break;

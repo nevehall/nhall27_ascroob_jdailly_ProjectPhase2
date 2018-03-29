@@ -9,7 +9,7 @@ public class Enemy1 : MonoBehaviour {
     public float speed; //  speed in m/s
 	public float fireRate = 0.3f; //seconds/shot
 	public float health = 10;
-	public int score = 100; //points earned to destroy
+	public int score;
 	public float showDamageDuration = 0.1f; //# seconds to show damage
 
     protected float angle = 3;
@@ -22,21 +22,25 @@ public class Enemy1 : MonoBehaviour {
 	public float damageDoneTime; //time to stop showing damage
 	public bool notifiedOfDestruction = false; //will be used later
 
-	public Text countText;
-	public Text highScore;
-	private int count;
+	private BoundsCheck _bndCheck;
+	private Hero hero;
+	static public Scores s;
 
 
-    private BoundsCheck _bndCheck;
-
-	void Start(){
-		count = 0;
-		SetCountText ();
-		highScore.text = "";
+	void Start()
+	{
+		GameObject heroObject = GameObject.FindWithTag ("Hero");
+		if (heroObject != null) {
+			hero = heroObject.GetComponent<Hero> ();
+		}
+		if (hero == null) {
+			Debug.Log ("Cannot find 'Hero' script");
+		}
 	}
 
     void Awake()
     {
+
         _bndCheck = GetComponent<BoundsCheck>();
 		//get materials and colors for this GameObject and its children
 		materials = Utils.GetAllMaterials(gameObject);
@@ -125,9 +129,11 @@ public class Enemy1 : MonoBehaviour {
 			health -= Main.GetWeaponDefinition(p.type).damageOnHit;
 			if(health<= 0){
 				//destroy this enemy
+     			Scores.AddPoints(this.score);
 				Destroy(this.gameObject);
-				count = count + 2;
-				SetCountText ();
+				Destroy(otherGO);
+				break;
+
 			}
 			Destroy(otherGO);
 			break;
@@ -137,6 +143,7 @@ public class Enemy1 : MonoBehaviour {
 			break;
 
 		}
+			
 	}
 
 	void ShowDamage(){
@@ -154,8 +161,5 @@ public class Enemy1 : MonoBehaviour {
 		showingDamage = false;
 	}
 
-	void SetCountText(){
-		countText.text = "Score: " + count.ToString ();
-	}
 }
 

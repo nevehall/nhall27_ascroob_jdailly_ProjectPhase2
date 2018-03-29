@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hero : MonoBehaviour {
     static public Hero S;
@@ -14,6 +15,10 @@ public class Hero : MonoBehaviour {
 	[SerializeField]
 
 	private float _shieldLevel = 4;
+
+	public int score;
+	public Text scoreText;
+
 
 	//this variable holds a reference to the last triggering GameObject
 	private GameObject lastTriggerGo = null;
@@ -33,6 +38,7 @@ public class Hero : MonoBehaviour {
 
     public float camWidth;
     public float camHeight;
+
 
     void Start()
     {
@@ -77,6 +83,19 @@ public class Hero : MonoBehaviour {
 		if (Input.GetAxis ("Jump") == 1 && fireDelegate != null) {
 			fireDelegate ();
 		}
+
+		if (Input.GetKeyDown (KeyCode.B)) {
+			weapons [0].SetType (WeaponType.blaster);
+		}
+
+		if (Input.GetKeyDown (KeyCode.S)) {
+			weapons [0].SetType (WeaponType.single);
+		}
+		//reset the highscore
+		if (Input.GetKeyDown (KeyCode.R)) {
+			Scores.ResetHighScore ();
+		}
+
 	}
 
     void LateUpdate()
@@ -162,6 +181,7 @@ public class Hero : MonoBehaviour {
 			_shieldLevel = Mathf.Min (value, 4);
 			if (value < 0) {
 				Destroy(this.gameObject);
+				Scores.Reset ();
 				//tell Main.S to restart the game after a delay
 				Main.S.DelayedRestart(gameRestartDelay);
 			}
@@ -182,5 +202,5 @@ public class Hero : MonoBehaviour {
 			w.SetType (WeaponType.none);
 		}
 	}
-
+		
 }
