@@ -32,13 +32,6 @@ public class LevelUp : MonoBehaviour {
 	{
 		Exp();
 
-		//if (Scores.score == 500) {
-			//if player presses E, they will get 100 experience
-			//used whenever want to give the player some experience
-		//	experience += 100;
-
-
-		//}
 	}
 
 	void RankUp()

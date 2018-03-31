@@ -858,13 +858,15 @@ MonoBehaviour:
   speed: 10
   fireRate: 0.3
   health: 5
-  score: 200
   showDamageDuration: 0.1
+  score: 200
   originalColors: []
   materials: []
   showingDamage: 1
   damageDoneTime: 0
   notifiedOfDestruction: 0
+  _bndCheck: {fileID: 114572121205131630}
+  S: {fileID: 114172692914525298}
 --- !u!114 &114572121205131630
 MonoBehaviour:
   m_ObjectHideFlags: 1

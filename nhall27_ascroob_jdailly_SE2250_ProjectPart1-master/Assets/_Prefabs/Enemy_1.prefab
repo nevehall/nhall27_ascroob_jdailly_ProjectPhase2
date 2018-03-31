@@ -497,14 +497,15 @@ MonoBehaviour:
   speed: 10
   fireRate: 0.3
   health: 3
-  score: 100
   showDamageDuration: 0.1
+  score: 100
   originalColors: []
   materials: []
   showingDamage: 0
   damageDoneTime: 0
   notifiedOfDestruction: 0
-  scoreValue: 5
+  _bndCheck: {fileID: 114302907538281842}
+  S: {fileID: 114393120773522448}
 --- !u!135 &135410416302234816
 SphereCollider:
   m_ObjectHideFlags: 1

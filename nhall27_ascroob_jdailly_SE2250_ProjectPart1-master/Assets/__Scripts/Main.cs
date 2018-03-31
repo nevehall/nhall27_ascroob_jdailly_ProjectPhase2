@@ -31,28 +31,39 @@ public class Main : MonoBehaviour {
 		}
     }
 
-    public void SpawnEnemy()
-    {
-        int ndx = Random.Range(0, prefabEnemies.Length);
-        GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);
+	public void SpawnEnemy()
+	{
+		int ndx;
+		if (Scores.score < 1000)  {
+			ndx = Random.Range(0, 2);
 
-        //position enemy above screen with random x position
-        float enemyPadding = enemyDefaultPadding;
-        if (go.GetComponent<BoundsCheck>() != null)
-        {
-            enemyPadding = Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
-        }
-        //set initial position for spawned enemy
-        Vector3 pos = Vector3.zero;
-        float xMin = -_bndCheck.camWidth + enemyPadding;
-        float xMax = _bndCheck.camWidth - enemyPadding;
-        pos.x = Random.Range(xMin, xMax);
-        pos.y = _bndCheck.camHeight + enemyPadding;
-        go.transform.position = pos;
+		}
+		else if (Scores.score >= 1000 && Scores.score < 2000)   {
+			ndx = Random.Range(0, 3);
+		}
+		else   {
+			ndx = Random.Range(0, prefabEnemies.Length);
+		}
 
-        //invoke spawnEnemy() again
-        Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
-    }
+		GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);
+
+		//position enemy above screen with random x position
+		float enemyPadding = enemyDefaultPadding;
+		if (go.GetComponent<BoundsCheck>() != null)
+		{
+			enemyPadding = Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
+		}
+		//set initial position for spawned enemy
+		Vector3 pos = Vector3.zero;
+		float xMin = -_bndCheck.camWidth + enemyPadding;
+		float xMax = _bndCheck.camWidth - enemyPadding;
+		pos.x = Random.Range(xMin, xMax);
+		pos.y = _bndCheck.camHeight + enemyPadding;
+		go.transform.position = pos;
+
+		//invoke spawnEnemy() again
+		Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
+	}
 
 	public void DelayedRestart(float delay){
 		//invoke the restart method in delay seconds

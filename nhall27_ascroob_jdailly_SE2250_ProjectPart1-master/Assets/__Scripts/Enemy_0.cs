@@ -1,0 +1,43 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Enemy_0: Enemy { 
+
+	public override void Move() {
+		base.Move();
+	}
+
+	public override void OnCollisionEnter(Collision coll) { 
+		GameObject otherGO = coll.gameObject;
+		switch (otherGO.tag)   {
+		case "ProjectileHero":
+			Projectile p = otherGO.GetComponent<Projectile>();
+			//if this enemy is off screen, dont damage it
+			if (!_bndCheck.isOnScreen)     {
+				Destroy(otherGO);
+				break;
+			}
+
+			//hurt this enemy
+			S.ShowDamage();
+			//get the damage amount from the main WEAP_DICT
+			health -= Main.GetWeaponDefinition(p.type).damageOnHit;
+			if (health <= 0) {
+				Scores.AddPoints(score);
+				//destroy this enemy
+				Destroy(this.gameObject);
+				Destroy(otherGO);
+				break;
+			}
+			Destroy(otherGO);
+			break;
+
+		default:
+			print("Enemy hit by non-ProjectileHero: " + otherGO.name);
+			break;
+
+		}
+		base.OnCollisionEnter(coll);
+	}
+}
