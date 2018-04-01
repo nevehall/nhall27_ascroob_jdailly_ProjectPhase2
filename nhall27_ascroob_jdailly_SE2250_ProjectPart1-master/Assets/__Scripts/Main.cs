@@ -16,6 +16,7 @@ public class Main : MonoBehaviour {
 
 	public WeaponDefinition[] weaponDefinitions;
 	public GameObject prefabPowerUp;
+	public GameObject prefabPowerUp2;
 
 
     private BoundsCheck _bndCheck;
@@ -37,7 +38,7 @@ public class Main : MonoBehaviour {
 		//potentially generate a powerup
 		if(Random.value <= e.powerUpDropChance){
 			//spawn a powerup
-			GameObject go = Instantiate(prefabPowerUp);
+			GameObject go = Instantiate(prefabPowerUp2);
 			PowerUp pu = go.GetComponent<PowerUp>();
 
 

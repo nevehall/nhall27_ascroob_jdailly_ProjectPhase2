@@ -718,6 +718,8 @@ MonoBehaviour:
     velocity: 0
   prefabPowerUp: {fileID: 1129205051611282, guid: 6293cee77e0224653a36389147f3ec41,
     type: 2}
+  prefabPowerUp2: {fileID: 1129205051611282, guid: 74cc7313bcc514f19817145940e7e759,
+    type: 2}
 --- !u!114 &1255005779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1507,6 +1509,7 @@ MonoBehaviour:
   _shieldLevel: 4
   score: 0
   scoreText: {fileID: 0}
+  invinc: 0
   speed: 30
   rollMult: -45
   pitchMult: 30

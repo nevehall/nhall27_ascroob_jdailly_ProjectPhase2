@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PowerUpType{
+	none,	//default; no power up 
+	invincible,	//invincibility for the hero
+	deathShot	//kills the enemy with one shot
+}
+
 public class PowerUp : MonoBehaviour {
 	[Header("Set in Inspector")]
 	//unusual but hand use of Vector2s
@@ -13,6 +19,7 @@ public class PowerUp : MonoBehaviour {
 
 	[Header("Set Dynamically")]
 	public WeaponType type; //the type of the PowerUp
+	public PowerUpType powerUpType = PowerUpType.none; //the type of PowerUp to drop
 	public GameObject cube; //reference to the Cube child
 	public TextMesh letter; //reference to the TextMesh
 	public Vector3 rotPerSecond; //euler rotation speed
@@ -109,4 +116,16 @@ public class PowerUp : MonoBehaviour {
 		//but for now, just destroy this.gameObject
 		Destroy (this.gameObject);
 	}
+
+	/*public void SetPowerUpType(PowerUpType pt){
+		switch (powerUpType) {
+		case PowerUpType.invincible:
+			print ("working invincibility");
+			break;
+		case PowerUpType.deathShot:
+			print ("working death Shot");
+			break;
+
+		}
+	}*/
 }

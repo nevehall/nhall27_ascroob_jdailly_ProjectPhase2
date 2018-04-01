@@ -19,6 +19,8 @@ public class Hero : MonoBehaviour {
 	public int score;
 	public Text scoreText;
 
+	public bool invinc = false;
+
 
 	//this variable holds a reference to the last triggering GameObject
 	private GameObject lastTriggerGo = null;
@@ -39,6 +41,9 @@ public class Hero : MonoBehaviour {
     public float camWidth;
     public float camHeight;
 
+	//protected bool onTriggerCalled = false;
+
+	float timeLeft;
 
     void Start()
     {
@@ -64,6 +69,10 @@ public class Hero : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		timeLeft -= Time.deltaTime;
+		if (timeLeft <= 0)
+			invinc = false;
+
         //Pull in info from Input class
         float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");
@@ -95,6 +104,7 @@ public class Hero : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.R)) {
 			Scores.ResetHighScore ();
 		}
+
 
 	}
 
@@ -139,8 +149,14 @@ public class Hero : MonoBehaviour {
 
 		//if shield was triggered by an enemy
 		if (go.tag == "Enemy") {
-			shieldLevel--;   //decrease shield level by 1
-			Destroy (go);  //and destroy the enemy
+			if (invinc == false) {
+				shieldLevel--;   //decrease shield level by 1
+				Destroy (go);  //and destroy the enemy
+			
+			} else if (invinc == true) {
+				Destroy (go);  //and destroy the enemys
+			
+			}
 		} else if (go.tag == "PowerUp") {
 			//if the shield was triggered by a PowerUp
 			AbsorbPowerUp (go);
@@ -151,7 +167,11 @@ public class Hero : MonoBehaviour {
 	
 	public void AbsorbPowerUp(GameObject go){
 		PowerUp pu = go.GetComponent<PowerUp> ();
-		switch (pu.type) {
+
+		//Transform rootT = other.gameObject.transform.root;
+		//GameObject go = rootT.gameObject;
+
+		/*switch (pu.type) {
 			case WeaponType.shield:
 				shieldLevel++;
 				break;
@@ -169,7 +189,23 @@ public class Hero : MonoBehaviour {
 			}
 			break;
 
+		}*/
+
+		switch(pu.powerUpType){
+		case PowerUpType.invincible:
+			print ("invincibility");	//for testing purposes
+				//shieldLevel++;
+			invinc = true;
+			timeLeft = 5.0f;
+
+			break;
+		case PowerUpType.deathShot:
+			print ("death shot");	//for testing purposes
+			break;
+
+			
 		}
+			
 		pu.AbsorbedBy (this.gameObject);
 	}
 
