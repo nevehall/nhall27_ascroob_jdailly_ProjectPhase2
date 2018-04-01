@@ -185,7 +185,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1129205051611282}
-  m_Text: P
+  m_Text: S
   m_OffsetZ: -2
   m_CharacterSize: 0.5
   m_LineSpacing: 1
@@ -214,7 +214,7 @@ MonoBehaviour:
   driftMinMax: {x: 0.25, y: 2}
   lifeTime: 6
   fadeTime: 4
-  type: 0
+  type: 6
   cube: {fileID: 0}
   letter: {fileID: 0}
   rotPerSecond: {x: 0, y: 0, z: 0}
