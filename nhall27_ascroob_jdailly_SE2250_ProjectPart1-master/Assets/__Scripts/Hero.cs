@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class Hero : MonoBehaviour {
     static public Hero S;
 
-	public Enemy E;
-
 	public float gameRestartDelay = 2f;
 	public GameObject projectilePrefab;
 	public float projectileSpeed = 40;
@@ -15,6 +13,8 @@ public class Hero : MonoBehaviour {
 
 
 	private BoundsCheck _bndCheck;
+
+	public Enemy E;
 
 
 	[Header("These fields are set dynamically")]
@@ -26,7 +26,7 @@ public class Hero : MonoBehaviour {
 	public Text scoreText;
 
 	public bool invinc = false;
-
+	public bool instantdeath=false;
 
 	//this variable holds a reference to the last triggering GameObject
 	private GameObject lastTriggerGo = null;
@@ -76,8 +76,10 @@ public class Hero : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		timeLeft -= Time.deltaTime;
-		if (timeLeft <= 0)
+		if (timeLeft <= 0) {
 			invinc = false;
+			instantdeath = false;
+		}
 
         //Pull in info from Input class
         float xAxis = Input.GetAxis("Horizontal");
@@ -184,17 +186,18 @@ public class Hero : MonoBehaviour {
 
 		switch(pu.powerUpType){
 		case PowerUpType.invincible:
-			print ("invincibility");	//for testing purposes
-				//shieldLevel++;
+			print ("Invincibility");	//for testing purposes
 			invinc = true;
 			timeLeft = 5.0f;
-
 			break;
+
 		case PowerUpType.deathShot:
-			print ("death shot");	//for testing purposes
+			print ("Death Shot");	//for testing purposes
+			instantdeath = true;
+			timeLeft = 10.0f;
 			break;
 
-			
+
 		}
 			
 		pu.AbsorbedBy (this.gameObject);

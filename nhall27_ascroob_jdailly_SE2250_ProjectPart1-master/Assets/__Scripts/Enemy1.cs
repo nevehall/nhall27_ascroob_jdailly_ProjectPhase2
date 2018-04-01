@@ -47,6 +47,11 @@ public class Enemy1 : Enemy{
 				Destroy(otherGO);
 				break;
 			}
+			if (Hero.S.instantdeath == true) {
+				S.ShowDamage ();
+				Destroy (this.gameObject);
+				Scores.AddPoints (score);
+			}
 
 			//hurt this enemy
 			S.ShowDamage();
@@ -71,9 +76,6 @@ public class Enemy1 : Enemy{
 
 		}
 	}
-
-	/*public override void DestroyAll(){
-		base.DestroyAll ();
-	}*/
+		
 }
 

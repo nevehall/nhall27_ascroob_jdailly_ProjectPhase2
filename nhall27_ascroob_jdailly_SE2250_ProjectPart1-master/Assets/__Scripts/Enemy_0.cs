@@ -14,13 +14,17 @@ public class Enemy_0: Enemy {
 		GameObject otherGO = coll.gameObject;
 		switch (otherGO.tag)   {
 		case "ProjectileHero":
-			Projectile p = otherGO.GetComponent<Projectile>();
+			Projectile p = otherGO.GetComponent<Projectile> ();
 			//if this enemy is off screen, dont damage it
-			if (!_bndCheck.isOnScreen)     {
-				Destroy(otherGO);
+			if (!_bndCheck.isOnScreen) {
+				Destroy (otherGO);
 				break;
 			}
-
+			if (Hero.S.instantdeath == true) {
+				S.ShowDamage ();
+				Destroy (this.gameObject);
+				Scores.AddPoints (score);
+			}
 			//hurt this enemy
  			S.ShowDamage();
 			//get the damage amount from the main WEAP_DICT
@@ -45,8 +49,5 @@ public class Enemy_0: Enemy {
 
 		}
 	}
-
-	/*public override void DestroyAll(){
-		base.DestroyAll ();
-	}*/
+		
 }

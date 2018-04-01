@@ -47,7 +47,11 @@ public class Enemy_2 : Enemy {
                     Destroy(otherGO);
                     break;
                 }
-
+			if (Hero.S.instantdeath == true) {
+				S.ShowDamage ();
+				Destroy (this.gameObject);
+				Scores.AddPoints (score);
+			}
                 //hurt this enemy
                 S.ShowDamage();
                 //get the damage amount from the main WEAP_DICT
@@ -71,8 +75,5 @@ public class Enemy_2 : Enemy {
 
         }
     }
-
-	/*public override void DestroyAll(){
-		base.DestroyAll ();
-	}*/
+		
 }

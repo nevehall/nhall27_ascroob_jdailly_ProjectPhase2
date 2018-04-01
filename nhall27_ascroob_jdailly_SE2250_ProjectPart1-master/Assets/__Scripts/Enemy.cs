@@ -88,15 +88,5 @@ public class Enemy : MonoBehaviour {
         }
         showingDamage = false;
     }
-
-
-	//destroys all enemies in the game view
-	/*public virtual void DestroyAll(){
-		GameObject go = gameObject;
-
-		if (_bndCheck.isOnScreen && go.tag == "Enemy") {
-			Destroy(go);
-		}
-	}*/
-
+		
 }
