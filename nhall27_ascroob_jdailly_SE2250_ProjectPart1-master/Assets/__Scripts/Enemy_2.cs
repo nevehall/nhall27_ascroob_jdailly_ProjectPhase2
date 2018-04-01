@@ -11,6 +11,7 @@ public class Enemy_2 : Enemy {
     private float x0; //inital x value of pos
     private float birthTime;
 
+	public float powerUpDropChance = 1f;
     void Start(){
         //set x0 to initial x pos of enemy
         x0 = pos.x;
@@ -53,6 +54,10 @@ public class Enemy_2 : Enemy {
                 health -= Main.GetWeaponDefinition(p.type).damageOnHit;
                 if (health <= 0)   {
                     Scores.AddPoints(score);
+					if (!S.notifiedOfDestruction) {
+						Main.S.ShipDestroyed2 (this);
+					}
+					S.notifiedOfDestruction = true;
                     //destroy this enemy
 					Destroy(this.gameObject);
                     Destroy(otherGO);
@@ -65,6 +70,5 @@ public class Enemy_2 : Enemy {
                 break;
 
         }
-        base.OnCollisionEnter(coll);
     }
 }

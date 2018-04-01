@@ -506,6 +506,7 @@ MonoBehaviour:
   notifiedOfDestruction: 0
   _bndCheck: {fileID: 114302907538281842}
   S: {fileID: 114393120773522448}
+  powerUpDropChance: 0
 --- !u!135 &135410416302234816
 SphereCollider:
   m_ObjectHideFlags: 1

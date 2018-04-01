@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy_0: Enemy { 
 
+	public float powerUpDropChance = 1f;
+
 	public override void Move() {
 		base.Move();
 	}
@@ -20,11 +22,15 @@ public class Enemy_0: Enemy {
 			}
 
 			//hurt this enemy
-			S.ShowDamage();
+ 			S.ShowDamage();
 			//get the damage amount from the main WEAP_DICT
 			health -= Main.GetWeaponDefinition(p.type).damageOnHit;
 			if (health <= 0) {
 				Scores.AddPoints(score);
+				if (!S.notifiedOfDestruction) {
+					Main.S.ShipDestroyed0 (this);
+				}
+				S.notifiedOfDestruction = true;
 				//destroy this enemy
 				Destroy(this.gameObject);
 				Destroy(otherGO);
@@ -38,6 +44,5 @@ public class Enemy_0: Enemy {
 			break;
 
 		}
-		base.OnCollisionEnter(coll);
 	}
 }

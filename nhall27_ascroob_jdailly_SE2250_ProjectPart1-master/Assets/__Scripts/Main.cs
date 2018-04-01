@@ -15,8 +15,50 @@ public class Main : MonoBehaviour {
     public float enemyDefaultPadding = 1.5f;
 
 	public WeaponDefinition[] weaponDefinitions;
+	public GameObject prefabPowerUp;
+
 
     private BoundsCheck _bndCheck;
+
+	public void ShipDestroyed1(Enemy1 e){
+		//potentially generate a powerup
+		if(Random.value <= e.powerUpDropChance){
+			//spawn a powerup
+			GameObject go = Instantiate(prefabPowerUp);
+			PowerUp pu = go.GetComponent<PowerUp>();
+
+
+			//set it to be the position of the destroyed ship
+			pu.transform.position = e.transform.position;
+		}
+	}
+
+	public void ShipDestroyed0(Enemy_0 e){
+		//potentially generate a powerup
+		if(Random.value <= e.powerUpDropChance){
+			//spawn a powerup
+			GameObject go = Instantiate(prefabPowerUp);
+			PowerUp pu = go.GetComponent<PowerUp>();
+
+
+			//set it to be the position of the destroyed ship
+			pu.transform.position = e.transform.position;
+		}
+	}
+
+	public void ShipDestroyed2(Enemy_2 e){
+		//potentially generate a powerup
+		if(Random.value <= e.powerUpDropChance){
+			//spawn a powerup
+			GameObject go = Instantiate(prefabPowerUp);
+			PowerUp pu = go.GetComponent<PowerUp>();
+
+
+			//set it to be the position of the destroyed ship
+			pu.transform.position = e.transform.position;
+		}
+	}
+		
 
     void Awake()
     {

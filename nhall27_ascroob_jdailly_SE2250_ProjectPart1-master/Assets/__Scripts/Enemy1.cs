@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Enemy1 : Enemy{
 
+	public float powerUpDropChance = 1f;
+
 	public override void Move()
 	{
 		Vector3 tempPos = pos;
@@ -52,6 +54,10 @@ public class Enemy1 : Enemy{
 			health -= Main.GetWeaponDefinition(p.type).damageOnHit;
 			if (health <= 0) {
 				Scores.AddPoints(score);
+     				if (!S.notifiedOfDestruction) {
+					Main.S.ShipDestroyed1 (this);
+				}
+				S.notifiedOfDestruction = true;
 				//destroy this enemy & bullet
 				Destroy(this.gameObject);
 				Destroy(otherGO);
@@ -64,7 +70,6 @@ public class Enemy1 : Enemy{
 			break;
 
 		}
-		base.OnCollisionEnter(coll);
 	}
 }
 

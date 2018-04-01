@@ -862,11 +862,12 @@ MonoBehaviour:
   score: 200
   originalColors: []
   materials: []
-  showingDamage: 1
+  showingDamage: 0
   damageDoneTime: 0
   notifiedOfDestruction: 0
   _bndCheck: {fileID: 114572121205131630}
   S: {fileID: 114172692914525298}
+  powerUpDropChance: 0.5
 --- !u!114 &114572121205131630
 MonoBehaviour:
   m_ObjectHideFlags: 1

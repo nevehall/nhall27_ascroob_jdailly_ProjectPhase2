@@ -11,13 +11,15 @@ public class Enemy : MonoBehaviour {
     public int score = 0;
 
     protected float angle = 3;
+	//public float powerUpDropChance; //chance to drop a power-up
+
 
     [Header("Set Dynamically: Enemy")]
     public Color[] originalColors;
     public Material[] materials; //all the materials of this & its children
     public bool showingDamage = false;
     public float damageDoneTime; //time to stop showing damage
-    public bool notifiedOfDestruction = false; //will be used later
+    public bool notifiedOfDestruction = false; 
 
     public BoundsCheck _bndCheck;
     private Hero hero;
@@ -65,7 +67,8 @@ public class Enemy : MonoBehaviour {
         pos = tempPos;
     }
 
-    public virtual void OnCollisionEnter(Collision coll) { }
+    public virtual void OnCollisionEnter(Collision coll) { 
+	}
 
     public void ShowDamage()
     {

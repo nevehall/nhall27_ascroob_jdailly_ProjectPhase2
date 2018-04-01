@@ -170,6 +170,7 @@ MonoBehaviour:
   waveFreq: 2
   waveWidth: 4
   waveRotY: 45
+  powerUpDropChance: 0
 --- !u!114 &114324931430466630
 MonoBehaviour:
   m_ObjectHideFlags: 1
