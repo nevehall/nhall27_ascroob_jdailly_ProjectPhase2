@@ -6,10 +6,16 @@ using UnityEngine.UI;
 public class Hero : MonoBehaviour {
     static public Hero S;
 
+	public Enemy E;
+
 	public float gameRestartDelay = 2f;
 	public GameObject projectilePrefab;
 	public float projectileSpeed = 40;
 	public Weapon[] weapons;
+
+
+	private BoundsCheck _bndCheck;
+
 
 	[Header("These fields are set dynamically")]
 	[SerializeField]
@@ -104,6 +110,14 @@ public class Hero : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.R)) {
 			Scores.ResetHighScore ();
 		}
+			
+		if(Input.GetKeyDown(KeyCode.K)){
+			GameObject[] gos = GameObject.FindGameObjectsWithTag ("Enemy");
+			foreach (GameObject go in gos) {
+				Destroy (go);
+			}
+			Scores.AddPoints (500);
+		}
 
 
 	}
@@ -167,29 +181,6 @@ public class Hero : MonoBehaviour {
 	
 	public void AbsorbPowerUp(GameObject go){
 		PowerUp pu = go.GetComponent<PowerUp> ();
-
-		//Transform rootT = other.gameObject.transform.root;
-		//GameObject go = rootT.gameObject;
-
-		/*switch (pu.type) {
-			case WeaponType.shield:
-				shieldLevel++;
-				break;
-
-		default:
-			if (pu.type == weapons [0].type) { //if it is the same type
-				Weapon w = GetEmptyWeaponSlot ();
-				if (w != null) {
-					//set it to pu.type
-					w.SetType (pu.type);
-				}
-			} else {
-				ClearWeapons ();
-				weapons [0].SetType (pu.type);
-			}
-			break;
-
-		}*/
 
 		switch(pu.powerUpType){
 		case PowerUpType.invincible:

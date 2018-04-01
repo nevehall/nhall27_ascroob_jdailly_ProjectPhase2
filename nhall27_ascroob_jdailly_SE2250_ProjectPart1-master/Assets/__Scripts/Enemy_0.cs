@@ -45,4 +45,8 @@ public class Enemy_0: Enemy {
 
 		}
 	}
+
+	/*public override void DestroyAll(){
+		base.DestroyAll ();
+	}*/
 }

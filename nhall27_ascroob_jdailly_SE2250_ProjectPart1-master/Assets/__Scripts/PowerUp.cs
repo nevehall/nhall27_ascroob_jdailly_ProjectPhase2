@@ -116,16 +116,4 @@ public class PowerUp : MonoBehaviour {
 		//but for now, just destroy this.gameObject
 		Destroy (this.gameObject);
 	}
-
-	/*public void SetPowerUpType(PowerUpType pt){
-		switch (powerUpType) {
-		case PowerUpType.invincible:
-			print ("working invincibility");
-			break;
-		case PowerUpType.deathShot:
-			print ("working death Shot");
-			break;
-
-		}
-	}*/
 }
