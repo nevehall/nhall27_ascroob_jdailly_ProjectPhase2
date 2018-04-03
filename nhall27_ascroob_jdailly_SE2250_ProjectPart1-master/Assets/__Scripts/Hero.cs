@@ -10,6 +10,7 @@ public class Hero : MonoBehaviour {
 	public GameObject projectilePrefab;
 	public float projectileSpeed = 40;
 	public Weapon[] weapons;
+	public GameObject BombPrefab;
 
 
 	private BoundsCheck _bndCheck;
@@ -47,17 +48,18 @@ public class Hero : MonoBehaviour {
     public float camWidth;
     public float camHeight;
 
-	//protected bool onTriggerCalled = false;
 
-	float timeLeft;
+	float timeLeftDeath;
+	float timeLeftInvinc;
+	float timeTill = 2f;
+
+	private float startTime;
 
     void Start()
     {
         //get size of play screen from camera
         camHeight = Camera.main.orthographicSize;
         camWidth = camHeight * Camera.main.aspect;
-
-		//fireDelegate += TempFire;
 
         if (S == null)
         {
@@ -75,12 +77,17 @@ public class Hero : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		timeLeft -= Time.deltaTime;
-		if (timeLeft <= 0) {
-			invinc = false;
+		timeLeftDeath -= Time.deltaTime;
+		if (timeLeftDeath <= 0) {
 			instantdeath = false;
 		}
-
+		timeLeftInvinc -= Time.deltaTime;
+		if (timeLeftInvinc <= 0) {
+			invinc = false;
+		}
+		if (timeTill > 0) {
+			timeTill -= Time.deltaTime;
+		}
         //Pull in info from Input class
         float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");
@@ -114,13 +121,23 @@ public class Hero : MonoBehaviour {
 		}
 			
 		if(Input.GetKeyDown(KeyCode.K)){
-			GameObject[] gos = GameObject.FindGameObjectsWithTag ("Enemy");
-			foreach (GameObject go in gos) {
-				Destroy (go);
+			if(timeTill <=0){
+				timeTill = 15f;
+				GameObject[] gos = GameObject.FindGameObjectsWithTag ("Enemy");
+				foreach (GameObject go in gos) {
+					Destroy (go);
+					BombDrop ();
+				}
 			}
-			Scores.AddPoints (500);
 		}
 
+
+	}
+
+	void BombDrop(){
+		GameObject bomb = Instantiate<GameObject> (BombPrefab);
+		var spawn = S.transform.position;
+		bomb.transform.position = new Vector3 (spawn.x, spawn.y, 2f);
 
 	}
 
@@ -188,13 +205,13 @@ public class Hero : MonoBehaviour {
 		case PowerUpType.invincible:
 			print ("Invincibility");	//for testing purposes
 			invinc = true;
-			timeLeft = 5.0f;
+			timeLeftInvinc = 5.0f;
 			break;
 
 		case PowerUpType.deathShot:
 			print ("Death Shot");	//for testing purposes
 			instantdeath = true;
-			timeLeft = 10.0f;
+			timeLeftDeath = 5.0f;
 			break;
 
 

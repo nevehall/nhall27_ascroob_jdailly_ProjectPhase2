@@ -26,18 +26,18 @@ public class Enemy_0: Enemy {
 				Scores.AddPoints (score);
 			}
 			//hurt this enemy
- 			S.ShowDamage();
+			S.ShowDamage ();
 			//get the damage amount from the main WEAP_DICT
-			health -= Main.GetWeaponDefinition(p.type).damageOnHit;
+			health -= Main.GetWeaponDefinition (p.type).damageOnHit;
 			if (health <= 0) {
-				Scores.AddPoints(score);
+				Scores.AddPoints (score);
 				if (!S.notifiedOfDestruction) {
 					Main.S.ShipDestroyed0 (this);
 				}
 				S.notifiedOfDestruction = true;
 				//destroy this enemy
-				Destroy(this.gameObject);
-				Destroy(otherGO);
+				Destroy (this.gameObject);
+				Destroy (otherGO);
 				break;
 			}
 			Destroy(otherGO);

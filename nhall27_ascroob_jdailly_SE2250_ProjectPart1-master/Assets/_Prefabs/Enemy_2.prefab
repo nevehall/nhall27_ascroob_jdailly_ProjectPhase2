@@ -160,6 +160,10 @@ MonoBehaviour:
   health: 3
   showDamageDuration: 0.1
   score: 250
+  projectilePrefab: {fileID: 1536988336815878, guid: a6d59deb36ade4080a844e522c84d746,
+    type: 2}
+  gunChance: 0.3
+  enemyShoot: 0
   originalColors: []
   materials: []
   showingDamage: 0
@@ -167,6 +171,8 @@ MonoBehaviour:
   notifiedOfDestruction: 0
   _bndCheck: {fileID: 114324931430466630}
   S: {fileID: 114190200947337466}
+  shoot: 0
+  num: 0
   waveFreq: 2
   waveWidth: 4
   waveRotY: 45

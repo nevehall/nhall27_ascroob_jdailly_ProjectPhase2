@@ -499,6 +499,10 @@ MonoBehaviour:
   health: 3
   showDamageDuration: 0.1
   score: 100
+  projectilePrefab: {fileID: 1536988336815878, guid: a6d59deb36ade4080a844e522c84d746,
+    type: 2}
+  gunChance: 0.2
+  enemyShoot: 1
   originalColors: []
   materials: []
   showingDamage: 0
@@ -506,6 +510,8 @@ MonoBehaviour:
   notifiedOfDestruction: 0
   _bndCheck: {fileID: 114302907538281842}
   S: {fileID: 114393120773522448}
+  shoot: 0
+  num: 0
   powerUpDropChance: 0.8
 --- !u!135 &135410416302234816
 SphereCollider:

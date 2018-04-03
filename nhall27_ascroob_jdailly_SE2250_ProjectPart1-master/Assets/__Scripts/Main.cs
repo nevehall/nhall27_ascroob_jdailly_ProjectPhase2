@@ -1,8 +1,8 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour {
     static public Main S; //singleton for main
@@ -20,6 +20,8 @@ public class Main : MonoBehaviour {
 
 
     private BoundsCheck _bndCheck;
+	public Text gameOverText;
+
 
 	public void ShipDestroyed1(Enemy1 e){
 		//potentially generate a powerup
@@ -110,11 +112,14 @@ public class Main : MonoBehaviour {
 
 	public void DelayedRestart(float delay){
 		//invoke the restart method in delay seconds
+		gameOverText.text = "Game Over";
+
 		Invoke ("Restart", delay);
 	}
 
 	public void Restart(){
 		//reload _scene_0 to restart the game
+		//gameOverText.text = "Game Over";
 		SceneManager.LoadScene("_Scenes/Main");
 	}
 
