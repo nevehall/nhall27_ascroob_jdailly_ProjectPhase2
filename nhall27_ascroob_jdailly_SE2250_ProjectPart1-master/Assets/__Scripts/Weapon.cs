@@ -117,7 +117,8 @@ public class Weapon : MonoBehaviour {
 		if (transform.parent.gameObject.tag == "Hero") {
 			go.tag = "ProjectileHero";
 			go.layer = LayerMask.NameToLayer ("ProjectileHero");
-		} else {
+		}
+		else {
 			go.tag = "ProjectileEnemy";
 			go.layer = LayerMask.NameToLayer ("ProjectileEnemy");
 		}

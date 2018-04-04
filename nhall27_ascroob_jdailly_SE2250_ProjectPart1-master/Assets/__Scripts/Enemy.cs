@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour {
 		}
 
 		num = Random.value;
-		if (Scores.score >= 1000 && shoot==false && enemyShoot && num < gunChance) {
+		if (Scores.score >= 3000 && shoot==false && enemyShoot && num < gunChance) {
 			InvokeRepeating ("TempFire", fireRate,fireRate);
 			shoot = true;
 		}
@@ -62,12 +62,13 @@ public class Enemy : MonoBehaviour {
 		set { this.transform.position = value; }
 	}
 
-	void Update(){
+	public virtual void Update(){
 		Move();
 
 		if (showingDamage && Time.time > damageDoneTime) { UnShowDamage(); }
 		if (_bndCheck != null && (_bndCheck.offDown || _bndCheck.offLeft || _bndCheck.offRight)) {
 			Destroy(gameObject);
+			Destroy(GameObject.FindWithTag("Enemy"));
 		}
 
 
@@ -91,13 +92,14 @@ public class Enemy : MonoBehaviour {
 		//	rB.velocity = Vector3.up * projectileSpeed;
 
 		Projectile proj = bulletGO.GetComponent<Projectile> ();
-		proj.type = WeaponType.blaster;
+		proj.type = WeaponType.single;
 		float tSpeed = Main.GetWeaponDefinition (proj.type).velocity;
 		rB.velocity = Vector3.down * tSpeed;
 
-	}
-	public virtual void OnCollisionEnter(Collision coll) { 
-	}
+		}
+
+
+	public virtual void OnCollisionEnter(Collision coll) { }
 
 	public void ShowDamage()
 	{

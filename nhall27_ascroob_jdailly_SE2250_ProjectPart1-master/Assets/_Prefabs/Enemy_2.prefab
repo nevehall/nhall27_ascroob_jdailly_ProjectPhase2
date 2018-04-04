@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   fireRate: 0.3
-  health: 3
+  health: 2
   showDamageDuration: 0.1
   score: 250
   projectilePrefab: {fileID: 1536988336815878, guid: a6d59deb36ade4080a844e522c84d746,

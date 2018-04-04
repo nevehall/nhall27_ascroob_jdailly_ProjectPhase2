@@ -864,6 +864,8 @@ MonoBehaviour:
     type: 2}
   gunChance: 0.2
   enemyShoot: 1
+  weapons:
+  - {fileID: 114716092283350414, guid: b3528fad753ec42f7802c02e3472fd69, type: 2}
   originalColors: []
   materials: []
   showingDamage: 0

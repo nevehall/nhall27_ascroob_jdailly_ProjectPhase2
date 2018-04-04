@@ -12,13 +12,13 @@ public class Scores : MonoBehaviour {
 
 	public static int highscore;
 
-	static public Scores s;
+	public static Scores S;
 
 
 	void Start()
 	{
-		if (s == null) {                                        // c
-			s = this;
+		if (S == null) {                                        // c
+			S = this;
 		}
 		score = 0;
 		highscore = PlayerPrefs.GetInt ("highscore", highscore);
@@ -43,7 +43,7 @@ public class Scores : MonoBehaviour {
 
 	public static void AddPoints (int pointsToAdd)
 	{
-		s.AddPOINTS(pointsToAdd);
+		S.AddPOINTS(pointsToAdd);
 		//pointsGained = 2*pointsToAdd;
 	}
 

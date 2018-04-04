@@ -10,6 +10,10 @@ public class Enemy_0: Enemy {
 		base.Move();
 	}
 
+	public override void Update(){
+		base.Update ();
+	}
+
 	public override void OnCollisionEnter(Collision coll) { 
 		GameObject otherGO = coll.gameObject;
 		switch (otherGO.tag)   {

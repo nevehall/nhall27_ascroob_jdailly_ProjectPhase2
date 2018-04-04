@@ -19,6 +19,10 @@ public class Enemy_2 : Enemy {
         birthTime = Time.time;
     }
 
+	public override void Update(){
+		base.Update ();
+	}
+
     public override void Move()
     {
         Vector3 tempPos = pos;

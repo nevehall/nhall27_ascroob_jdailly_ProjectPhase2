@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Hero : MonoBehaviour {
     static public Hero S;
 
-	public float gameRestartDelay = 2f;
+	public float gameRestartDelay = 5f;
 	public GameObject projectilePrefab;
 	public float projectileSpeed = 40;
 	public Weapon[] weapons;
@@ -44,6 +44,9 @@ public class Hero : MonoBehaviour {
     public float radius = 1f;
 
     [Header("Set Dynamically")]
+	public Color[] originalColors;
+	public Material[] materials; //all the materials of this & its children
+	public bool showInvinc = false;
 
     public float camWidth;
     public float camHeight;
@@ -54,6 +57,16 @@ public class Hero : MonoBehaviour {
 	float timeTill = 2f;
 
 	private float startTime;
+
+	void Awake(){
+		//get materials and colors for this GameObject and its children
+		materials = Utils.GetAllMaterials(gameObject);
+		originalColors = new Color[materials.Length];
+		for (int i = 0; i < materials.Length; i++)
+		{
+			originalColors[i] = materials[i].color;
+		}
+	}
 
     void Start()
     {
@@ -77,10 +90,29 @@ public class Hero : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+
 		timeLeftDeath -= Time.deltaTime;
 		if (timeLeftDeath <= 0) {
 			instantdeath = false;
 		}
+		if (timeLeftInvinc > 0 && showInvinc==false ) {
+			foreach (Material m in materials)
+			{
+				m.color = Color.yellow;
+			}
+
+			showInvinc = true;
+		}
+
+		if (timeLeftInvinc <= 0) {
+			for (int i = 0; i < materials.Length; i++)
+			{
+				materials[i].color = originalColors[i];
+			}
+			showInvinc = false;
+		}
+
 		timeLeftInvinc -= Time.deltaTime;
 		if (timeLeftInvinc <= 0) {
 			invinc = false;
@@ -112,7 +144,7 @@ public class Hero : MonoBehaviour {
 			weapons [0].SetType (WeaponType.blaster);
 		}
 
-		if (Input.GetKeyDown (KeyCode.S)) {
+		if (Input.GetKeyDown (KeyCode.X)) {
 			weapons [0].SetType (WeaponType.single);
 		}
 		//reset the highscore
@@ -160,6 +192,7 @@ public class Hero : MonoBehaviour {
         }
 
         transform.position = pos;
+
     }
 
     //draw bounds in scene pane 
@@ -188,9 +221,11 @@ public class Hero : MonoBehaviour {
 			
 			} else if (invinc == true) {
 				Destroy (go);  //and destroy the enemys
+				Scores.AddPoints(200);
 			
 			}
-		} else if (go.tag == "PowerUp") {
+		} 
+		else if (go.tag == "PowerUp") {
 			//if the shield was triggered by a PowerUp
 			AbsorbPowerUp (go);
 		} else {
@@ -206,6 +241,7 @@ public class Hero : MonoBehaviour {
 			print ("Invincibility");	//for testing purposes
 			invinc = true;
 			timeLeftInvinc = 5.0f;
+			showInvinc = false;
 			break;
 
 		case PowerUpType.deathShot:

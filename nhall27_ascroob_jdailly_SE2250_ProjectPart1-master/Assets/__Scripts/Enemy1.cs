@@ -35,6 +35,10 @@ public class Enemy1 : Enemy{
 		}
 	}
 
+	public override void Update(){
+		base.Update ();
+	}
+
 	public override void OnCollisionEnter(Collision coll)
 	{
 		GameObject otherGO = coll.gameObject;

@@ -503,6 +503,7 @@ MonoBehaviour:
     type: 2}
   gunChance: 0.2
   enemyShoot: 1
+  weapons: []
   originalColors: []
   materials: []
   showingDamage: 0

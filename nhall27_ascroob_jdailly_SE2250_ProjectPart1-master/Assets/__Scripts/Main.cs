@@ -23,6 +23,16 @@ public class Main : MonoBehaviour {
 	public Text gameOverText;
 
 
+	void Update(){
+		if (_bndCheck != null && (_bndCheck.offDown || _bndCheck.offLeft || _bndCheck.offRight)) {
+			Destroy(gameObject);
+
+		}
+
+
+
+	}
+
 	public void ShipDestroyed1(Enemy1 e){
 		//potentially generate a powerup
 		if(Random.value <= e.powerUpDropChance){
@@ -79,11 +89,11 @@ public class Main : MonoBehaviour {
 	public void SpawnEnemy()
 	{
 		int ndx;
-		if (Scores.score < 1000)  {
+		if (Scores.score < 1500)  {
 			ndx = Random.Range(0, 2);
 
 		}
-		else if (Scores.score >= 1000 && Scores.score < 2000)   {
+		else if (Scores.score >= 1000 && Scores.score < 3000)   {
 			ndx = Random.Range(0, 3);
 		}
 		else   {

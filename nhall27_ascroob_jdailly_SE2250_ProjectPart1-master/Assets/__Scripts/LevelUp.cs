@@ -9,7 +9,7 @@ public class LevelUp : MonoBehaviour {
 	//variables
 	public int level;
 	private float experience;
-	private float experienceRequired=1000;
+	private float experienceRequired=1500;
 
 	//hp of the player, only for testing purposes
 	public float hp;
@@ -44,7 +44,7 @@ public class LevelUp : MonoBehaviour {
 				break;
 			case 2:
 				print ("Congratulations! You have hit Level 2 on your character!");
-				experienceRequired = 2000;
+				experienceRequired = 3000;
 				levelUp.text = "Level 2" ;
 				break;
 			case 3:
